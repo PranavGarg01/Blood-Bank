@@ -53,7 +53,8 @@ li{
 	background-color:rgb(252, 251, 244);
 	border: none;
 	border-radius: 8px;
-	/* margin-top: 0; */
+	margin-top: 35px;
+	margin-bottom: 35px;
 }
 .card:hover {
     -webkit-box-shadow: 1px 1px 12px 0px rgba(0,0,0,0.48);
@@ -113,6 +114,38 @@ hr{
 	margin-top: 5%;
     /* height: 100px; */
     /* overflow: hidden; */
+}
+.container {
+	padding-top: 3%;
+	text-align: center;
+	/* width: 70%; */
+}
+.quan {
+	margin: 0 auto;
+	/* margin-top: 1%; */
+	margin-left: 2.5%;
+	margin-right : 2.5%;	
+	width: 80px;
+	height: 100px;
+	border-radius: 8px;
+	text-align: center;
+	-webkit-box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.48);
+	-moz-box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.48);
+	box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.48);
+	font-size: 22px;
+}
+	
+
+.innerquan{
+	display:flex;
+   align-items: center;
+   justify-content: center;
+   color:white;
+   font-size: 27px;
+   height:65%;
+    background-color: rgb(252, 147, 164);/* rgb(247, 67, 103);rgb(231, 42, 42); */
+   border-radius: 8px 8px 0 0;
+   font-weight: bold;
 }
 
 .mytable{

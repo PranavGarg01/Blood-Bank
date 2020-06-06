@@ -19,14 +19,22 @@
 		  <div class="navbar-nav ml-auto">
 			<a class="nav-item nav-link " href="/">Home  <span class="sr-only">(current)</span></a>
 			<a class="nav-item nav-link" href="/donor">Donor Register </a>
-			<a class="nav-item nav-link" href="/bankLogin">BloodBank Login </a>
+			<a class="nav-item nav-link active" href="/bankLogin">BloodBank Login </a>
 			<a class="nav-item nav-link" href="/hospitalLogin">Hospital Login </a>
 		  </div>
 		</div>
 	</nav>
 
-    
-
+    <div>
+	<div class="container">
+		<% data.forEach(function(dat) { %>
+			<div class="card quan">
+				<div class="innerquan"><%= dat.blood_group %><%= dat.rh_factor %></div><%= dat.available %></div>
+		<% }); %>
+	
+	
+	</div>
+	
 <div class="cont">
 	<div class="card">
         <h2 class="hospitalName"><%= h1[0].hospital_name %></h2>
@@ -117,9 +125,9 @@
 			
 			</tbody>
 		  </table>
-	</div>
+		</div>
     </div> 
 </div>
-
+</div>
 </body>
 </html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Blood Requests</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="css/hBloodRequests.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="/">BloodBank</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+		  <span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+		  <div class="navbar-nav ml-auto">
+			<a class="nav-item nav-link " href="/">Home</a>
+			<a class="nav-item nav-link" href="/donor">Donor Register </a>
+			<a class="nav-item nav-link " href="/bankLogin">BloodBank Login </a>
+			<a class="nav-item nav-link active" href="/hospitalLogin">Hospital Login </a>
+		  </div>
+		</div>
+	  </nav>
+
+
+      <div class="naam">
+        <span class="hsp"><i class="fas fa-plus-square"> ‎ ‎</i><%= data[0].hospital_name %> </span>
+     </div>
+    <div class="container-lg">
+        <!-- <h2 class="hospitalName"><%= data[0].hospital_name %></h2>
+            <div><hr></div> -->
+		<div class="bhjdisj">
+            <h4>Total Blood Requests :<span class="hjkjhbhj"> <%= total %></span></h4>
+            <div><hr></div>
+		</div>
+		<div class="mytable">
+		<table class="table table-borderless ">
+			<thead>
+			  <tr>
+				<th class="name" scope="col">Name</th>
+				<th scope="col">Type</th>
+				<th scope="col">Units</th>
+				<th scope="col">Status</th>
+			  </tr>
+			</thead>
+			<tbody>
+				<% data.forEach(function(dat) { %>
+                    <tr>
+						<td scope="row" class="name"><%= dat.first_name %> <%= dat.last_name %></td>
+						<td><%= dat.blood_group %><%= dat.rh_factor %></td>
+						<td class="units"><%= dat.quantity_needed%>‏‏‎</td>
+						<td><% if (dat.approval == true) { %>
+                            <i class="fas fa-check"></i>
+                            <%} else { %>
+                                Pending
+                            <% } %></td>
+					  </tr>
+                <% }); %>
+			</tbody>
+		  </table>
+		</div>
+    </div>
+</body>
+</html>

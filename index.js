@@ -89,7 +89,7 @@ app.post('/authBank',function(req,res)
     var password = req.body.password;
     if(username=="admin" && password=="123456")
     {
-        res.render("bloodbank"); // successful login
+        res.redirect("bloodbank"); // successful login
     }
     else
     {
@@ -120,7 +120,11 @@ app.post('/authHospital',function(req,res)
 //BloodBank Admin Panel
 app.get('/bloodbank',function(req,res)
 {
-    res.render("bloodbank"); 
+    var q = "SELECT * FROM blood_bank";
+    connection.query(q,function(error,results) {
+        res.render("bloodbank",{data:results});
+    })
+     
 });
 
 app.get('/bbBloodRequest',function(req,res)
@@ -147,14 +151,19 @@ app.get('/bbBloodRequest',function(req,res)
                         var q = "SELECT SUM(quantity_needed) as total from blood_request INNER JOIN patients ON blood_request.patient_id = patients.id INNER JOIN hospitals ON blood_request.hospital_id = hospitals.id WHERE blood_request.hospital_id = 3 && blood_request.approval = 0;";
                         connection.query(q,function(err, results){
                             var t3 = results[0].total;
-                            res.render("bbBloodRequests", {
+                            var q = "SELECT * FROM blood_bank";
+                            connection.query(q,function(error,results) {
+                                res.render("bbBloodRequests", {
 								h1: h1,
 								t1: t1,
 								h2: h2,
 								t2: t2,
 								h3: h3,
 								t3: t3,
+                                data:results
 							});
+                            })
+                            
                         });
                     });
                 });
@@ -172,7 +181,7 @@ app.get('/updateRequest',function(req,res)
     var blood_group = req.query.blood_group;
 
     var rh_factor;
-    if('- '== req.query.rh_factor)
+    if('-'== req.query.rh_factor)
     {
         rh_factor = '-';
     }
@@ -180,12 +189,12 @@ app.get('/updateRequest',function(req,res)
         rh_factor = '+';
     }
     console.log(request_id + "=request_id");
-    var q = "SELECT quantity_needed FROM blood_request WHERE id = ?";
-    connection.query(q,[request_id], function(err, results){
+    var q = "SELECT quantity_needed FROM blood_request WHERE id = ?;";
+    connection.query(q,[request_id,request_id], function(err, results){
         console.log( results[0].quantity_needed + "=quantity"); 
         var quantity = +results[0].quantity_needed;
-        
-        var q = "UPDATE blood_bank SET total_donated = total_donated + ? WHERE blood_group = ? && rh_factor = ?;UPDATE blood_bank SET available = available - ? WHERE blood_group = ? && rh_factor = ?;";
+        // Here add the blood donation RULES ( CHECK AVAILABLITY )
+        var q = "UPDATE blood_bank SET total_donated = total_donated + ? WHERE blood_group = ? && rh_factor = ?;UPDATE blood_bank SET available = available - ? WHERE blood_group = ? && rh_factor = ?;UPDATE blood_request SET approval = 1 WHERE id = ?;";
    
         connection.query(
 			q,
@@ -196,8 +205,10 @@ app.get('/updateRequest',function(req,res)
 				quantity,
 				blood_group,
 				rh_factor,
+                request_id
 			],
 			function (err, results) {
+                console.log(rh_factor)
 				console.log(results);
 				res.redirect("bbBloodRequest");
 			}
@@ -370,6 +381,15 @@ app.post('/uploadPatientQuantity',function(req,res)
     });
 });
 
+//add Patient
+app.get('/hBloodRequests',function(req,res)
+{
+    var q = "SELECT hospital_name,first_name,last_name,age,blood_group,rh_factor,blood_request.approval as approval,quantity_needed from blood_request INNER JOIN patients ON blood_request.patient_id = patients.id INNER JOIN hospitals ON blood_request.hospital_id = hospitals.id WHERE blood_request.hospital_id = ?"; 
+    connection.query(q,[hospitalId],function(error,results){
+        console.log(results.length);
+        res.render("hBloodRequests",{data:results,total:results.length});
+    });
+})
 
 
 
