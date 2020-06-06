@@ -1,0 +1,109 @@
+body{
+	background: linear-gradient(to right, #ffdde1, #ee9ca7, #a7bfe8, #6190e8);
+	background-size: 500% 500%;
+	background-position: 50% 50%;
+	font-family: 'Comfortaa', cursive;
+	font-weight: 100;
+	color: rgb(69,69,69);
+}
+
+.container-lg{
+
+	width:40%;
+	height:530px;
+	margin-top:60px;
+	margin-bottom: 50px;
+	text-align: center;
+	padding: 50px;
+	background-color:rgb(252, 251, 244);
+	box-shadow: 0px 0px 12px -3px rgba(110,84,110,1);
+    border-radius: 8px;
+    
+
+}
+
+#icon {
+    height: 80px;
+    width: 80px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+}
+
+img{
+    max-width:90%;
+    height:auto;
+    /* margin-bottom: 25px; */
+}
+
+.form {
+	border: none;
+	border-bottom: 3px solid #ebebeb;
+	margin-top: 30px;
+	width: 90%;
+	font-size: 20px;
+	background: transparent;
+	color: rgb(89,89,89);
+	font-weight: 400;
+	padding-left: 10px;
+	transition: 0.3s;
+
+}
+
+input[type=text]:focus {
+  outline: none;
+  font-size: 23px;
+  color:gray;
+}
+input[type=password]:focus{
+	outline: none;
+    font-size: 25px;
+    color:gray;
+}
+
+hr{
+	background-color:rgba(251,96,127,0.4);
+	height: 1.5px;
+	width: 100%;
+	margin-bottom: 30px;
+}
+
+::placeholder{
+    color:#bbbbbb;
+    font-family: FontAwesome,'Comfortaa', cursive;
+}
+
+.button{
+	margin-top: 50px;
+	margin-bottom: 30px;
+	width: 80%;
+	background-color: rgb(255,156,167);
+	color: white;
+	font-weight: 400px;
+	border:none;
+	/* padding: 150px; */
+}
+
+.button:focus{
+	outline:none !important;
+	background-color: #DB5656 !important ;
+}
+
+#err{
+    color:red;
+    font-size: 20px;;
+}
+
+ /* Navbar CSS  */
+ .navbar {
+	font-size: 15px;
+	-webkit-box-shadow: 0px 1px 12px 0px rgba(0,0,0,0.48);
+	-moz-box-shadow: 0px 1px 12px 0px rgba(0,0,0,0.48);
+	box-shadow: 0px 1px 12px 0px rgba(0,0,0,0.48);
+	background-color:rgb(252, 251, 244) !important;
+ }
+.navbar-brand {
+	font-weight : 700;
+}
+.nav-item {
+	padding-left: 20px !important;
+}

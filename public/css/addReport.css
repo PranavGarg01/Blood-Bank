@@ -1,0 +1,136 @@
+body{
+	background: linear-gradient(to right, #ffdde1, #ee9ca7, #a7bfe8, #6190e8);
+	background-size: 400% 400%;
+	background-position: 50% 50%;
+	font-family: 'Comfortaa', cursive;
+}
+
+.container-lg{
+
+	width:43%;
+	margin-top:50px;
+	margin-bottom: 50px;
+	text-align: center;
+	padding: 50px;
+	opacity:1;
+	background-color:rgb(252, 251, 244);
+	box-shadow: 0px 0px 14px -2px rgba(110,84,110,1);
+	border-radius : 8px;
+}
+
+h1{
+	font-size: 43px;
+	color: rgb(79,79,79);
+	margin-top:23px;
+	/* font-weight: 100; */
+
+}
+
+.form {
+
+	border: none;
+	border-bottom: 3px solid #ebebeb;
+	margin-top: 30px;
+	width: 90%;
+	font-size: 20px;
+	background: transparent;
+	color: rgb(89,89,89);
+	font-weight: 400;
+	padding-left: 10px;
+	transition: 0.3s;
+
+}
+input[type=number]:focus{
+    outline: none;
+     font-size: 20px;
+     color:gray;
+}
+input[type=text]:focus {
+  outline: none;
+  font-size: 23px;
+  color:gray;
+}
+input[type=email]:focus{
+	 outline: none;
+	  font-size: 20px;
+	  color:gray;
+}
+
+button:focus{
+	outline:none !important;
+	background-color: #DB5656 !important ;
+}
+
+::placeholder{
+	color:#bbbbbb;
+}
+
+
+.dropdowns	{font-size: 18px;
+	color: gray;
+	padding:2px;
+	border:none;
+	background-color: #ececec;
+	border-radius: 4px;
+	margin-left: 15px;
+	text-align: left;
+	margin-top: 0;
+}
+
+.labels {
+	width: 90%;
+	text-align: left;
+	
+}
+
+label{
+	text-align: left;
+	font-size: 15px;
+	margin-left: 30px;
+	color:rgb(99,99,99);
+
+}
+
+.ques {
+	margin-top: 35px;
+}
+.dd{
+	
+	width: 86%;
+	margin: 0 auto;
+	text-align: left;
+}
+
+
+button{
+	margin-top: 50px;
+	margin-bottom: 30px;
+	width: 80%;
+	background-color: rgb(255,156,167);
+	color: white;
+	font-weight: 400px;
+	border:none;
+	padding: 150px;
+}
+
+hr{
+	background-color:rgba(251,96,127,0.4);
+	height: 1.5px;
+	width: 100%;
+	margin-bottom: 30px;
+}
+
+/* Navbar CSS  */
+.navbar {
+	font-size: 15px;
+	-webkit-box-shadow: 0px 1px 12px 0px rgba(0,0,0,0.48);
+	-moz-box-shadow: 0px 1px 12px 0px rgba(0,0,0,0.48);
+	box-shadow: 0px 1px 12px 0px rgba(0,0,0,0.48);
+	background-color:rgb(252, 251, 244) !important;
+ }
+.navbar-brand {
+	font-weight : 700;
+}
+.nav-item {
+	padding-left: 20px !important;
+}

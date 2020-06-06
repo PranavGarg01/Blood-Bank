@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DONOR REGISTER</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/addReport.css">
+	<link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+
+	
+</head>
+<body>
+	<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="">BloodBank</a>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+		  <div class="navbar-nav ml-auto">
+			<a class="nav-item nav-link " href="/">Home</a>
+			<a class="nav-item nav-link " href="/donor">Donor Register </a>
+			<a class="nav-item nav-link" href="/bankLogin">BloodBank Login </a>
+			<a class="nav-item nav-link" href="/hospitalLogin">Hospital Login </a>
+		  </div>
+		</div>
+	  </nav>
+	<div class="container-lg">
+		<img src="images/hospital (1).png">
+		<h1>Add Blood Report</h1>
+		<hr>
+		<form action="/uploadReport" method="POST">
+            <input class="form" name="donor_id" type="number" placeholder="Donor Id"><br>
+            <input class="form" name="donor_hb" type="number" step="0.01" placeholder="Haemoglobin ( Hb )"><br>
+           <div class="labels">
+            <label class="ques">Diabetic : 
+                
+                
+                <label> YES
+                    <input type="radio" name="diabetic_patient" value="1">
+                </label>
+                <label>NO
+                    <input type="radio" name="diabetic_patient" value="0">
+                </label>
+               
+            </label>
+            
+            <label class="ques">HIV Patient : 
+                
+                    <label>YES 
+                    <input type="radio" name="hiv_patient" value="1">
+                </label>
+                <label>NO  
+                    <input type="radio" name="hiv_patient" value="0">
+                </label>
+                
+           </label>
+           
+           <label class="ques">Blood Pressure Patient :
+                
+                    <label> YES
+                        <input type="radio" name="bp_patient" value="1">
+                    </label>
+                    <label>NO 
+                        <input type="radio" name="bp_patient" value="0">
+                    </label>
+                
+            </label>
+        </div>
+        
+            
+
+		
+		<button type="submit" class="btn-lg">
+			ADD REPORT 
+		</button>
+		</form>			
+	</div>	
+</body>
+</html>

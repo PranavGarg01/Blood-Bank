@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DONOR REGISTER</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="css/donorRegistration.css">
+
+	<link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+
+	
+</head>
+<body>
+	<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="">BloodBank</a>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+		  <div class="navbar-nav ml-auto">
+			<a class="nav-item nav-link " href="/">Home</a>
+			<a class="nav-item nav-link active" href="/donor">Donor Register </a>
+			<a class="nav-item nav-link" href="/bankLogin">BloodBank Login </a>
+			<a class="nav-item nav-link" href="/hospitalLogin">Hospital Login </a>
+		  </div>
+		</div>
+	  </nav>
+	<div class="container-lg">
+		<img src="images/hospital (1).png">
+		<h1>Registration Form</h1>
+		<hr>
+		<form action="/registerDonor" method="POST">
+			<input class="form" name="first_name" type="text" placeholder="First Name"><br>
+			<input class="form" name="last_name" type="text" placeholder="Last Name"><br>
+
+	
+
+		<input name="age" type="text" class="form" placeholder="Age">
+
+		<input name="contact_number" type="text"  class="form" placeholder="Contact Number">
+
+		<input name="email" type="email" class="form" placeholder="E-mail">
+
+		<div class="dd">
+			<label for="bgrp">Choose the Blood Group:  </label>
+
+				<select name="blood_group" id="bgrp" class="dropdowns">
+				  <option value="O">O</option>
+				  <option value="A">A</option>
+				  <option value="B">B</option>
+				  <option value="AB">AB</option>
+				</select>	
+				
+			<label for="rh">Choose the RH-Factor:  </label>
+
+				<select name="rh_factor" id="rh" class="dropdowns">
+				  <option value="+">+</option>
+				  <option value="-">-</option>
+				</select>
+		</div>	
+
+		<button type="submit" class="btn-lg">
+			REGISTER NOW 
+		</button>
+		</form>			
+	</div>	
+</body>
+</html>

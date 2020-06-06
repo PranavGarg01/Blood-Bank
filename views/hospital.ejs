@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= hospital_name %></title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/hospital.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="/">BloodBank</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+		  <span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+		  <div class="navbar-nav ml-auto">
+			<a class="nav-item nav-link " href="/">Home  <span class="sr-only">(current)</span></a>
+			<a class="nav-item nav-link" href="/donor">Donor Register </a>
+			<a class="nav-item nav-link" href="/bankLogin">BloodBank Login </a>
+			<a class="nav-item nav-link" href="/hospitalLogin">Hospital Login </a>
+		  </div>
+		</div>
+	  </nav>
+
+<div class="naam">
+   <span class="hsp"><i class="fas fa-plus-square"> ‎ ‎</i><%= hospital_name %> </span>
+</div>
+<div class="cont">
+	<div class="card">
+        <a href="addPatient" class="button">
+            <img src="images/heart (1).png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Request Blood for Patient</h5> 
+
+            </div>
+        </a>
+    </div>
+    <div class="card">
+        <a href="/statistics" class="button">
+            <img src="images/statistics.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Statistics<br>‎‎‏‏‎ ‎</h5> 
+
+            </div>
+        </a>
+    </div>
+    <div class="card">
+        <a href="/bloodRequests" class="button">
+            <img src="images/blood-request.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Pending Blood Requests</h5> 
+
+            </div>
+        </a>
+    </div>  
+</div>
+</body>
+</html>
