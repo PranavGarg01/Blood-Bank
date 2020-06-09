@@ -50,7 +50,7 @@ app.post('/registerDonor',function(req,res)
 			req.body.last_name,
 			req.body.blood_group,
 			req.body.rh_factor,
-			req.body.age,
+			+req.body.age,
 			req.body.contact_number,
 		    req.body.email
         ]
@@ -152,6 +152,8 @@ app.get('/bbBloodRequest',function(req,res)
                         connection.query(q,function(err, results){
                             var t3 = results[0].total;
                             var q = "SELECT * FROM blood_bank";
+                            var er = +req.query.error;
+                            console.log(er + " error ")
                             connection.query(q,function(error,results) {
                                 res.render("bbBloodRequests", {
 								h1: h1,
@@ -160,7 +162,8 @@ app.get('/bbBloodRequest',function(req,res)
 								t2: t2,
 								h3: h3,
 								t3: t3,
-                                data:results
+                                data:results,
+                                er: er
 							});
                             })
                             
@@ -194,25 +197,204 @@ app.get('/updateRequest',function(req,res)
         console.log( results[0].quantity_needed + "=quantity"); 
         var quantity = +results[0].quantity_needed;
         // Here add the blood donation RULES ( CHECK AVAILABLITY )
-        var q = "UPDATE blood_bank SET total_donated = total_donated + ? WHERE blood_group = ? && rh_factor = ?;UPDATE blood_bank SET available = available - ? WHERE blood_group = ? && rh_factor = ?;UPDATE blood_request SET approval = 1 WHERE id = ?;";
-   
-        connection.query(
-			q,
-			[
-				quantity,
-				blood_group,
-				rh_factor,
-				quantity,
-				blood_group,
-				rh_factor,
-                request_id
-			],
-			function (err, results) {
-                console.log(rh_factor)
-				console.log(results);
-				res.redirect("bbBloodRequest");
-			}
-		);
+        //0 - A+
+        //1 - A-
+        //2 - AB+
+        //3 - AB-
+        //4 - B+
+        //5 - B-
+        //6 - O+
+        //7 - O-
+        var donor_blood_group = 'NULL';
+        var q= "SELECT * FROM blood_bank;";
+        connection.query(q, function(error,results){
+            
+            console.log("results + " + results[2].blood_group);
+            if(blood_group == 'A')
+            {
+                
+                if(rh_factor == '-')
+                {
+                    if(results[1].available >= quantity) //A-
+                    {
+                        donor_blood_group = results[1].blood_group;
+                    }
+                    else if (results[7].available >= quantity) //O-
+                    {
+                        donor_blood_group = results[7].blood_group; // O-
+                    }
+                }
+                else 
+                { // if rh_factor is +
+                    if(results[0].available >= quantity) //A+
+                    {
+                        donor_blood_group = results[0].blood_group; 
+                    }
+                    else if (results[6].available >= quantity) //O+
+                    {
+                        donor_blood_group = results[6].blood_group; 
+                    }
+                    else if(results[1].available >= quantity) //A-
+                    {
+                        donor_blood_group = results[1].blood_group; 
+                    }
+                    else if (results[7].available >= quantity) //O-
+                    {
+                        donor_blood_group = results[7].blood_group; 
+                    }
+                }
+            }
+            if(blood_group == 'B')
+            {
+                
+                if(rh_factor == '-')
+                {
+                    if(results[5].available >= quantity) //B-
+                    {
+                        donor_blood_group = results[5].blood_group;
+                    }
+                    else if (results[7].available >= quantity) //O-
+                    {
+                        donor_blood_group = results[7].blood_group; // O-
+                    }
+                }
+                else 
+                { // if rh_factor is +
+                    if(results[4].available >= quantity) //B+
+                    {
+                        donor_blood_group = results[4].blood_group; 
+                    }
+                    else if (results[6].available >= quantity) //O+
+                    {
+                        donor_blood_group = results[6].blood_group; 
+                    }
+                    else if(results[5].available >= quantity) //B-
+                    {
+                        donor_blood_group = results[5].blood_group; 
+                    }
+                    else if (results[7].available >= quantity) //O-
+                    {
+                        donor_blood_group = results[7].blood_group; 
+                    }
+                }
+            }
+            if(blood_group == 'AB')
+            {
+                
+                if(rh_factor == '-')
+                {
+                    if(results[3].available >= quantity) //AB-
+                    {
+                        donor_blood_group = results[3].blood_group;
+                    }
+                    else if(results[1].available >= quantity) //A-
+                    {
+                        donor_blood_group = results[1].blood_group;
+                    }
+                    else if(results[5].available >= quantity) //B-
+                    {
+                        donor_blood_group = results[5].blood_group;
+                    }
+                    else if (results[7].available >= quantity) //O-
+                    {
+                        donor_blood_group = results[7].blood_group; // O-
+                    }
+                }
+                else 
+                { // if rh_factor is +
+                    if(results[2].available >= quantity) //AB+
+                    {
+                        donor_blood_group = results[2].blood_group;
+                    }
+                    else if(results[0].available >= quantity) //A+
+                    {
+                        donor_blood_group = results[0].blood_group;
+                    }
+                    else if(results[4].available >= quantity) //B+
+                    {
+                        donor_blood_group = results[4].blood_group;
+                    }
+                    else if(results[6].available >= quantity) //O+
+                    {
+                        donor_blood_group = results[6].blood_group;
+                    }
+                    else if(results[3].available >= quantity) //AB-
+                    {
+                        donor_blood_group = results[3].blood_group;
+                    }
+                    else if(results[1].available >= quantity) //A-
+                    {
+                        donor_blood_group = results[1].blood_group;
+                    }
+                    else if(results[5].available >= quantity) //B-
+                    {
+                        donor_blood_group = results[5].blood_group;
+                    }
+                    else if(results[7].available >= quantity) //O+
+                    {
+                        donor_blood_group = results[7].blood_group;
+                    }
+                    
+                }
+            }
+            if(blood_group == 'O')
+            {
+                
+                if(rh_factor == '-')
+                {
+                    console.log(rh_factor);
+                    if(results[7].available >= quantity) //O-
+                    {
+                        donor_blood_group = results[7].blood_group
+                    }
+                }
+                else 
+                { // if rh_factor is +
+                console.log(rh_factor);
+                console.log(results[6].available + " = available quantity");
+                console.log(quantity + " = req quantity");
+                    if(results[6].available >= quantity) //O+
+                    {
+                        console.log(results[6].available >= quantity)
+                        donor_blood_group = results[6].blood_group;
+                    }
+                    else if(results[7].available >= quantity) //O-
+                    {
+                        donor_blood_group = results[7].blood_group;
+                    }
+                }
+            }
+            console.log(donor_blood_group + "= donor bg");
+        
+        
+            // here check if new blood group was added 
+            if(donor_blood_group != 'NULL')
+            {
+                var q = "UPDATE blood_bank SET total_donated = total_donated + ? WHERE blood_group = ? && rh_factor = ?;UPDATE blood_bank SET available = available - ? WHERE blood_group = ? && rh_factor = ?;UPDATE blood_request SET approval = 1 WHERE id = ?;";
+        
+                connection.query(
+                    q,
+                    [
+                        quantity,
+                        donor_blood_group,
+                        rh_factor,
+                        quantity,
+                        donor_blood_group,
+                        rh_factor,
+                        request_id
+                    ],
+                    function (err, results) {
+                        console.log(rh_factor)
+                        console.log(results);
+                        res.redirect("bbBloodRequest?error=0");
+                    }
+                );
+            }
+            else 
+            {
+                res.redirect("bbBloodRequest?error=1"); // error for bbBloodRequest Page
+            }
+        });
     });
      
 });
@@ -381,6 +563,11 @@ app.post('/uploadPatientQuantity',function(req,res)
     });
 });
 
+//home
+app.get('/',function(req,res){
+    res.render("home");
+});
+
 //add Patient
 app.get('/hBloodRequests',function(req,res)
 {
@@ -390,6 +577,33 @@ app.get('/hBloodRequests',function(req,res)
         res.render("hBloodRequests",{data:results,total:results.length});
     });
 })
+
+app.get('/bbStatistics',function(req,res){
+    var q="SELECT * FROM blood_bank;";
+    connection.query(q,function(error,results){
+        var blood_bank = results;
+        var q="select count(*) as total_donors FROM (select count(donor_id) from donations  INNER JOIN reports ON donations.report_id = reports.id GROUP BY reports.donor_id) as tab;";
+        connection.query(q,function(error,results){
+            var total_donors = results[0].total_donors;
+            var q="select count(*) as total_patients from blood_request where approval = 1;";
+            connection.query(q,function(error,results){
+                var total_patients=results[0].total_patients;
+                var q="SELECT sum(total_recieved) as total FROM blood_bank";
+                connection.query(q, function(error,results){
+                    res.render("bbStatistics", {
+					blood_bank: blood_bank,
+					total_donors: total_donors,
+					total_patients: total_patients,
+                    total : results[0].total
+				});
+                });
+                
+
+            });
+        });
+    });
+    
+});
 
 
 

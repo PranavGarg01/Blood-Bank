@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Blood Requests</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/bbStatistics.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="/">BloodBank</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+		  <span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+		  <div class="navbar-nav ml-auto">
+			<a class="nav-item nav-link " href="/">Home  <span class="sr-only">(current)</span></a>
+			<a class="nav-item nav-link" href="/donor">Donor Register </a>
+			<a class="nav-item nav-link active" href="/bankLogin">BloodBank Login </a>
+			<a class="nav-item nav-link" href="/hospitalLogin">Hospital Login </a>
+		  </div>
+		</div>
+	</nav>
+
+    <div>
+        <div class="container">
+            <% blood_bank.forEach(function(dat) { %>
+                <div class="card quan">
+                    <div class="innerquan"><%= dat.blood_group %><%= dat.rh_factor %></div><%= dat.available %></div>
+            <% }); %>
+        
+        
+        </div>
+<div class="cont">
+	
+	<div class="card">
+		
+        <h2 class="hospitalName">Blood Groups Stats</h2>
+            <div><hr></div>
+		<div class="mytable">
+		<table class="table table-borderless ">
+			<thead>
+			  <tr>
+				<th class="name" scope="col">Blood Group</th>
+				<th scope="col">Total Received</th>
+				<th scope="col">Total Donated</th>
+				<!-- <th scope="col"></th> -->
+			  </tr>
+			</thead>
+			<tbody>
+				
+				<% blood_bank.forEach(function(dat) { %>
+                    <tr>
+						<td scope="row" class="name"><%= dat.blood_group %><%= dat.rh_factor %></td>
+						<td><%= dat.total_recieved %></td>
+						<td><%= dat.total_donated %>‏‏‎</td>
+					</tr>
+                <% }); %>
+				
+			</tbody>
+		  </table>
+	</div>
+    </div>
+  <div class="smallcards">
+    <div class="mycard card">
+        <span class="don_name">Total Donors</span> 
+       
+        <span class="values"><%= total_donors %></span>
+    </div>
+    <div class="mycard card">
+        <span class="don_name">Total Patients Helped </span>
+        
+        <span class="values"><%= total_patients %></span>
+    </div>
+    <div class="mycard card">
+      <span class="don_name">Total Hospitals Registered </span>
+    
+      <span class="values">3</span>
+  </div>
+    </div>
+    <div class="card">
+        <div class="box">
+            <div class="graph">
+                <% var arr = [0,12.5,25,37.5,50,62.5,75,87.5,100]; %>
+
+            <% for ( var i=0; i <8 ; i++ ) { %>
+                <% var x = ((blood_bank[i].total_recieved/total)*100)*2.5; %>
+                <!-- in the ejs above change the +10 to your liking -->
+              <div class="m" style="height: <%= x %>%; left:<%=arr[i]%>%"></div>
+            <% } %>
+        
+            </div>
+        </div>  
+    </div>
+</div>  
+</div>
+</body>
+</html>

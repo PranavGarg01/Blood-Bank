@@ -36,12 +36,22 @@
 	</div>
 	
 <div class="cont">
+	<br><br>
+	<% if (er == 1) { %> 
+		<div id="err">Blood quantity requested is not available !!</div>
+		<%}%>
 	<div class="card">
-        <h2 class="hospitalName"><%= h1[0].hospital_name %></h2>
+		
+        <h2 class="hospitalName">Hospital 1</h2>
             <div><hr></div>
-		<div class="bhjdisj">
-			<h4>Total Blood required :<span class="hjkjhbhj"> <%= t1 %> </span> units</h4>
-		</div>
+			<div class="bhjdisj">
+				<h4>Total Blood required :<span class="hjkjhbhj">
+					<% if (t1) { %> 
+						<%= t1 %>
+					<%} else { %>
+						0
+					<% } %></span> units</h4>
+			</div>
 		<div class="mytable">
 		<table class="table table-borderless ">
 			<thead>
@@ -53,6 +63,7 @@
 			  </tr>
 			</thead>
 			<tbody>
+				<% if (h1) { %> 
 				<% h1.forEach(function(dat) { %>
                     <tr>
 						<td scope="row" class="name"><%= dat.first_name %> <%= dat.last_name %></td>
@@ -61,16 +72,23 @@
 						<td><a href="/updateRequest?id=<%= dat.request_id %>&blood_group=<%= dat.blood_group %>&rh_factor=<%= dat.rh_factor %>"><i class="fas fa-check-circle"></i></a></td>
 					</tr>
                 <% }); %>
-			
+				<%}%>
 			</tbody>
 		  </table>
 	</div>
     </div>
     <div class="card">
-        <h2 class="hospitalName"><%= h2[0].hospital_name %></h2>
+		
+			<h2 class="hospitalName">Hospital 2</h2>
+			
             <div><hr></div>
 		<div class="bhjdisj">
-			<h4>Total Blood required :<span class="hjkjhbhj"> <%= t2 %> </span> units</h4>
+			<h4>Total Blood required :<span class="hjkjhbhj">
+				<% if (t2) { %> 
+					<%= t2 %>
+				<%} else { %>
+					0
+				<% } %></span> units</h4>
 		</div>
 		<div class="mytable">
 		<table class="table table-borderless ">
@@ -84,25 +102,31 @@
 			</thead>
 			
 			<tbody>
-				<% h2.forEach(function(dat) { %>
-                    <tr>
-						<td scope="row" class="name"><%= dat.first_name %> <%= dat.last_name %></td>
-						<td><%= dat.blood_group %><%= dat.rh_factor %></td>
-						<td class="units"><%= dat.quantity_needed%>‏‏‎</td>
-						<td><a href="/updateRequest?id=<%= dat.request_id %>&blood_group=<%= dat.blood_group %>&rh_factor=<%= dat.rh_factor %>"><i class="fas fa-check-circle"></i></a></td>
-					  </tr>
-                <% }); %>
-			
+				<% if (h2) { %> 
+					<% h2.forEach(function(dat) { %>
+						<tr>
+							<td scope="row" class="name"><%= dat.first_name %> <%= dat.last_name %></td>
+							<td><%= dat.blood_group %><%= dat.rh_factor %></td>
+							<td class="units"><%= dat.quantity_needed%>‏‏‎</td>
+							<td><a href="/updateRequest?id=<%= dat.request_id %>&blood_group=<%= dat.blood_group %>&rh_factor=<%= dat.rh_factor %>"><i class="fas fa-check-circle"></i></a></td>
+						  </tr>
+					<% }); %>
+					<%}%>
 			</tbody>
 		  </table>
 	</div>
     </div>
 	<div class="card">
-        <h2 class="hospitalName"><%= h3[0].hospital_name %></h2>
+        <h2 class="hospitalName">Hospital 3</h2>
             <div><hr></div>
-		<div class="bhjdisj">
-			<h4>Total Blood required :<span class="hjkjhbhj"> <%= t3 %> </span> units</h4>
-		</div>
+			<div class="bhjdisj">
+				<h4>Total Blood required :<span class="hjkjhbhj">
+					<% if (t3) { %> 
+						<%= t3 %>
+					<%} else { %>
+						0
+					<% } %></span> units</h4>
+			</div>
 		<div class="mytable">
 		<table class="table table-borderless ">
 			<thead>
@@ -114,6 +138,7 @@
 			  </tr>
 			</thead>
 			<tbody>
+				<% if (h3) { %> 
 				<% h3.forEach(function(dat) { %>
                     <tr>
 						<td scope="row" class="name"><%= dat.first_name %> <%= dat.last_name %></td>
@@ -122,7 +147,7 @@
 						<td><a href="/updateRequest?id=<%= dat.request_id %>&blood_group=<%= dat.blood_group %>&rh_factor=<%= dat.rh_factor %>"><i class="fas fa-check-circle"></i></a></td>
 					  </tr>
                 <% }); %>
-			
+				<%}%>
 			</tbody>
 		  </table>
 		</div>
