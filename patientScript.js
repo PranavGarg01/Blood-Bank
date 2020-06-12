@@ -5,7 +5,7 @@ const connection = mysql.createConnection({
 	host: "localhost",
 	user: "root",
 	database: "bloodbank",
-	password: "haatu peak",
+	password: "",
 	// debug: true,
 	multipleStatements: true,
 	typeCast: function castField(field, useDefaultTypeCasting) {
@@ -22,15 +22,16 @@ const connection = mysql.createConnection({
 
 		return useDefaultTypeCasting();
 	},
-});      
-for(i=0;i<4;i++) // change the i to your preference
+});  
+
+for(i=0;i<2;i++) // change the i to your preference
 {
     var firstName = faker.name.firstName();
     var lastName = faker.name.lastName();
     var age = faker.random.number({min:5, max:110});
     var blood_group = faker.random.arrayElement(["A","B","AB","O"]);
     var rh_factor = faker.random.arrayElement(["+","-"]);
-    var hospital_id = 3; // change this yourself
+    var hospital_id = 1; // change this yourself
     var q = "INSERT INTO patients(first_name,last_name,blood_group,rh_factor,age,hospital_id) VALUES ?";
     var values = [
 		[
@@ -47,19 +48,15 @@ for(i=0;i<4;i++) // change the i to your preference
         var q = "SELECT * FROM patients WHERE id = ?";
         connection.query(q,[results.insertId], function(err, results){
             console.log(results[0]);
-            var q = "INSERT INTO blood_request(hospital_id,patient_id,quantity_needed) VALUES ?";
+            var q = "INSERT INTO blood_request(patient_id,quantity_needed) VALUES ?";
             var values = [
                 [
-                    hospital_id,
                     results[0].id,
                     faker.random.number({min:1, max:6})
                 ]
             ];
             connection.query(q,[values], function(err, results){
                 console.log("added");
-
-//<input type="number" id="quantity" name="quantity" min="1" max="5"><br><br>
-
             });
         });
     });

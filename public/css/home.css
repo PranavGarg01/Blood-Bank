@@ -4,13 +4,6 @@ body, html {
   font-family: 'Comfortaa', cursive;
 }
 
-.second{
-    /* height:1000px; */
-    background-color:white;
-    font-size:20px;
-    height:400px;
-    background-color:rgba(176,196,222,0.4)
-}
 
 .parallax {
   /* The image used */

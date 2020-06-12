@@ -32,15 +32,15 @@ h4{
 .card{
 	width: 30%;
 	height: 450px;
-	margin-left: 2.2%;
+	margin-left: 13%;
 	/* display: inline-block; */
 	float:left;
 	text-align: center;
 	background-color:rgb(252, 251, 244);
 	border: none;
 	border-radius: 8px;
-	margin-top: 35px;
-	margin-bottom: 35px;
+	margin-top: 40px;
+	margin-bottom: 50px;
 }
 .card:hover {
     -webkit-box-shadow: 1px 1px 12px 0px rgba(0,0,0,0.48);
@@ -51,7 +51,7 @@ h4{
 
 
 .mycard {
-   width:100%;
+   width:16%;
    height:125px;
    /* display:flex; */
    /* align-items:center; */
@@ -60,7 +60,9 @@ h4{
    /* width:60%; */
     margin-top: 0px;
     padding: 7px;
-    float:none; 
+    float:left; 
+    margin-left: 13%;
+    margin-bottom: 0;
     /* margin-top: 35px; */
      /*
 	text-align: center;
@@ -74,14 +76,15 @@ h4{
 }
 
 .smallcards {
-    width: 15%;
+    /* width: 15%; */
      margin-left:2.2%;
     /*margin-right:auto;
     height:auto; 
     width:auto; */
+    display: inline;
     /* display: block; */
     margin-top:35px;
-    float:left;
+    /* float:left; */
     
 }
 .values{
@@ -261,7 +264,47 @@ th{
     background: rgb(252, 147, 164);
     position: absolute;
     bottom: 0;
+    color : white;
     left: 0;
     animation: up1 1s ease-in;
+  }
+  .s{
+    height: 20%;
+    width: calc(100% / 7);
+    background: rgb(252, 147, 164);
+    position: absolute;
+    bottom: 0;
+    /* padding-top: 10px; */
+    color: white;
+    left: 0;
+    animation: up1 1s ease-in;
+  }
+  .graph2{
+    width: 88%;
+    height: 88%;
+    position: absolute;
+    border-left: 2px solid #FF8484;
+    border-bottom: 2px solid #FF8484;
+    left: 8%;
+  }
+  .graph2:after{
+    content: '18-24 25-30 31-35 36-40 41-45 46-50';
+    position: absolute;
+    text-align: center;
+    bottom: -25px;
+    margin: auto;
+    left: 0;
+    color: #BA6161;
+    right: 0;
+    font-size: 16px  
+  }
+  .graph2:before{
+    font-size: 14px;
+    content: 'No. of Donors';
+    position: absolute;
+    bottom: 50%;
+    left:-64px;
+    color: rgb(186, 97, 97);
+    transform: rotate(-90deg);
   }
   

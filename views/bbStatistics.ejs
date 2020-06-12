@@ -35,7 +35,6 @@
         
         </div>
 <div class="cont">
-	
 	<div class="card">
 		
         <h2 class="hospitalName">Blood Groups Stats</h2>
@@ -64,23 +63,7 @@
 		  </table>
 	</div>
     </div>
-  <div class="smallcards">
-    <div class="mycard card">
-        <span class="don_name">Total Donors</span> 
-       
-        <span class="values"><%= total_donors %></span>
-    </div>
-    <div class="mycard card">
-        <span class="don_name">Total Patients Helped </span>
-        
-        <span class="values"><%= total_patients %></span>
-    </div>
-    <div class="mycard card">
-      <span class="don_name">Total Hospitals Registered </span>
-    
-      <span class="values">3</span>
-  </div>
-    </div>
+  
     <div class="card">
         <div class="box">
             <div class="graph">
@@ -95,6 +78,68 @@
             </div>
         </div>  
     </div>
+</div>
+<div class="cont">
+    <div class="smallcards">
+      <div class="mycard card">
+          <span class="don_name">Total Donors</span> 
+         
+          <span class="values"><%= total_donors %></span>
+      </div>
+      <div class="mycard card">
+          <span class="don_name">Total Patients Helped </span>
+          
+          <span class="values"><%= total_patients %></span>
+      </div>
+      <div class="mycard card">
+        <span class="don_name">Total Hospitals Registered </span>
+      
+        <span class="values">3</span>
+      </div>
+    </div>
+    <div class="card">
+		
+      <h2 class="hospitalName">Top Donors</h2>
+          <div><hr></div>
+      <div class="mytable">
+      <table class="table table-borderless ">
+        <thead>
+        <tr>
+        <th class="name" scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Total Donated</th>
+        <!-- <th scope="col"></th> -->
+        </tr>
+      </thead>
+      <tbody>
+        
+        <% top_donors.forEach(function(dat) { %>
+                    <tr>
+            <td scope="row" class="name"><%= dat.id %></td>
+            <td><%= dat.first_name %> <%= dat.last_name %></td>
+            <td><%= dat.total %>‏‏‎</td>
+          </tr>
+                <% }); %>
+        
+      </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="box">
+          <div class="graph2">
+              <!-- in the ejs above change the +10 to your liking -->
+          <div class="s" style="height: <%= (age_ranges.one/total_donors)*100 %>%; left : 0%"><%=age_ranges.one %></div>
+          <div class="s" style="height: <%= (age_ranges.two/total_donors)*100 %>%; left:16.666%"><%=age_ranges.two%></div>
+          <div class="s" style="height: <%= (age_ranges.third/total_donors)*100 %>%; left:33.333%"><%=age_ranges.third %></div>
+          <div class="s" style="height: <%= (age_ranges.fourth/total_donors)*100 %>%; left:49.999%"><%=age_ranges.fourth %></div>
+          <div class="s" style="height: <%= (age_ranges.fifth/total_donors)*100 %>%; left:66.666%"><%=age_ranges.fifth %></div>
+          <div class="s" style="height: <%= (age_ranges.sixth/total_donors)*100 %>%; left:83.333%"><%=age_ranges.sixth %></div>  
+          </div>
+      </div>  
+    </div>
+    
 </div>  
 </div>
 </body>

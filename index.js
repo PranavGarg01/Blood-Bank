@@ -129,26 +129,26 @@ app.get('/bloodbank',function(req,res)
 
 app.get('/bbBloodRequest',function(req,res)
 {
-    var q = "SELECT blood_request.id as request_id, hospital_name,first_name,last_name,blood_group,rh_factor,quantity_needed from blood_request INNER JOIN patients ON blood_request.patient_id = patients.id INNER JOIN hospitals ON blood_request.hospital_id = hospitals.id WHERE blood_request.hospital_id = 1 && blood_request.approval = 0;";
+    var q = "SELECT blood_request.id as request_id, hospital_name,first_name,last_name,blood_group,rh_factor,quantity_needed from blood_request INNER JOIN patients ON blood_request.patient_id = patients.id INNER JOIN hospitals ON patients.hospital_id = hospitals.id WHERE patients.hospital_id = 1 && blood_request.approval = 0;";
     connection.query(q, function(err, results){
         console.log(results.length);
         var h1 = results; 
-        var q = "SELECT SUM(quantity_needed) as total from blood_request INNER JOIN patients ON blood_request.patient_id = patients.id INNER JOIN hospitals ON blood_request.hospital_id = hospitals.id WHERE blood_request.hospital_id = 1 && blood_request.approval = 0;";
+        var q = "SELECT SUM(quantity_needed) as total from blood_request INNER JOIN patients ON blood_request.patient_id = patients.id INNER JOIN hospitals ON patients.hospital_id = hospitals.id WHERE patients.hospital_id = 1 && blood_request.approval = 0;";
         connection.query(q,function(err, results){
             var t1 = results[0].total;
-            var q = "SELECT blood_request.id as request_id, hospital_name,first_name,last_name,blood_group,rh_factor,quantity_needed from blood_request INNER JOIN patients ON blood_request.patient_id = patients.id INNER JOIN hospitals ON blood_request.hospital_id = hospitals.id WHERE blood_request.hospital_id = 2 && blood_request.approval = 0;";
+            var q = "SELECT blood_request.id as request_id, hospital_name,first_name,last_name,blood_group,rh_factor,quantity_needed from blood_request INNER JOIN patients ON blood_request.patient_id = patients.id INNER JOIN hospitals ON patients.hospital_id = hospitals.id WHERE patients.hospital_id = 2 && blood_request.approval = 0;";
             connection.query(q, function(err, results){
                 console.log(results.length);
                 var h2 = results; 
-                var q = "SELECT SUM(quantity_needed) as total from blood_request INNER JOIN patients ON blood_request.patient_id = patients.id INNER JOIN hospitals ON blood_request.hospital_id = hospitals.id WHERE blood_request.hospital_id = 2 && blood_request.approval = 0;";
+                var q = "SELECT SUM(quantity_needed) as total from blood_request INNER JOIN patients ON blood_request.patient_id = patients.id INNER JOIN hospitals ON patients.hospital_id = hospitals.id WHERE patients.hospital_id = 2 && blood_request.approval = 0;";
                 connection.query(q,function(err, results){
                     var t2 = results[0].total;
                     // res.render("bbBloodRequests",{h1:h1,t1:t1,h2:h2,t2:t2}); 
-                    var q = "SELECT blood_request.id as request_id, hospital_name,first_name,last_name,blood_group,rh_factor,quantity_needed from blood_request INNER JOIN patients ON blood_request.patient_id = patients.id INNER JOIN hospitals ON blood_request.hospital_id = hospitals.id WHERE blood_request.hospital_id = 3 && blood_request.approval = 0;";
+                    var q = "SELECT blood_request.id as request_id, hospital_name,first_name,last_name,blood_group,rh_factor,quantity_needed from blood_request INNER JOIN patients ON blood_request.patient_id = patients.id INNER JOIN hospitals ON patients.hospital_id = hospitals.id WHERE patients.hospital_id = 3 && blood_request.approval = 0;";
                     connection.query(q, function(err, results){
                         console.log(results.length);
                         var h3 = results; 
-                        var q = "SELECT SUM(quantity_needed) as total from blood_request INNER JOIN patients ON blood_request.patient_id = patients.id INNER JOIN hospitals ON blood_request.hospital_id = hospitals.id WHERE blood_request.hospital_id = 3 && blood_request.approval = 0;";
+                        var q = "SELECT SUM(quantity_needed) as total from blood_request INNER JOIN patients ON blood_request.patient_id = patients.id INNER JOIN hospitals ON patients.hospital_id = hospitals.id WHERE patients.hospital_id = 3 && blood_request.approval = 0;";
                         connection.query(q,function(err, results){
                             var t3 = results[0].total;
                             var q = "SELECT * FROM blood_bank";
@@ -550,10 +550,10 @@ app.post('/uploadPatientQuantity',function(req,res)
     
     // console.log(report_id);
     var p = req.body;
-    var q = "INSERT INTO blood_request(hospital_id,patient_id,quantity_needed) VALUES ?";
+    var q = "INSERT INTO blood_request(patient_id,quantity_needed) VALUES ?";
     var values = [
 		[
-            +p.hospital_id,
+           // +p.hospital_id,//ISNU HATANA HAI
             +p.patient_id,
             +p.quantity
         ]
@@ -571,7 +571,7 @@ app.get('/',function(req,res){
 //add Patient
 app.get('/hBloodRequests',function(req,res)
 {
-    var q = "SELECT hospital_name,first_name,last_name,age,blood_group,rh_factor,blood_request.approval as approval,quantity_needed from blood_request INNER JOIN patients ON blood_request.patient_id = patients.id INNER JOIN hospitals ON blood_request.hospital_id = hospitals.id WHERE blood_request.hospital_id = ?"; 
+    var q = "SELECT hospital_name,first_name,last_name,age,blood_group,rh_factor,blood_request.approval as approval,quantity_needed from blood_request INNER JOIN patients ON blood_request.patient_id = patients.id INNER JOIN hospitals ON patients.hospital_id = hospitals.id WHERE patients.hospital_id = ?"; 
     connection.query(q,[hospitalId],function(error,results){
         console.log(results.length);
         res.render("hBloodRequests",{data:results,total:results.length});
@@ -590,12 +590,24 @@ app.get('/bbStatistics',function(req,res){
                 var total_patients=results[0].total_patients;
                 var q="SELECT sum(total_recieved) as total FROM blood_bank";
                 connection.query(q, function(error,results){
-                    res.render("bbStatistics", {
-					blood_bank: blood_bank,
-					total_donors: total_donors,
-					total_patients: total_patients,
-                    total : results[0].total
-				});
+                    var total = results[0].total;
+                var q = "select donors.first_name as first_name,donors.last_name as last_name,donors.id as id,SUM(donations.quantity) AS total from donations INNER JOIN reports ON report_id = reports.id INNER JOIN donors ON reports.donor_id = donors.id GROUP BY reports.donor_id ORDER BY total DESC LIMIT 5;"
+                connection.query(q,function(err,results){
+                    var top_donors = results;
+                    var q = "SELECT SUM(IF(age BETWEEN 18 and 24,1,0)) as 'one', SUM(IF(age BETWEEN 25 and 30,1,0)) as 'two', SUM(IF(age BETWEEN 31 and 35,1,0)) as 'third', SUM(IF(age BETWEEN 36 and 40,1,0)) as 'fourth', SUM(IF(age BETWEEN 41 and 45,1,0)) as 'fifth', SUM(IF(age BETWEEN 46 and 50,1,0)) as 'sixth' FROM (select distinct donor_id,age from donations INNER JOIN reports ON donations.report_id = reports.id  INNER JOIN donors ON donors.id = reports.donor_id) as tab;";
+                    connection.query(q,function(err,results){
+                        res.render("bbStatistics", {
+                            blood_bank: blood_bank,
+                            total_donors: total_donors,
+                            total_patients: total_patients,
+                            total : total,
+                            top_donors :top_donors,
+                            age_ranges : results[0]
+				        });
+                    });
+                    
+                })
+                
                 });
                 
 

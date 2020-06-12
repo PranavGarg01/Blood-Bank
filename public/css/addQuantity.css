@@ -4,7 +4,11 @@ body{
 	background-position: 50% 50%;
 	font-family: 'Comfortaa', cursive;
 }
-
+img{
+    max-width:90%;
+    height:auto;
+    /* margin-bottom: 25px; */
+}
 .container-lg{
 
 	width:43%;
@@ -64,6 +68,12 @@ button:focus{
 }
 
 
+#icon {
+    height: 80px;
+    width: 80px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+}
 
 button{
 	margin-top: 50px;

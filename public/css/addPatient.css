@@ -6,6 +6,12 @@ body{
 
 }
 
+img{
+    max-width:90%;
+    height:auto;
+    /* margin-bottom: 25px; */
+}
+
 .container-lg{
 
 	width:43%;
@@ -40,6 +46,13 @@ h1{
 	padding-left: 10px;
 	transition: 0.3s;
 
+}
+
+#icon {
+    height: 80px;
+    width: 80px;
+    margin: 0 auto;
+    margin-bottom: 15px;
 }
 
 input[type=text]:focus {
